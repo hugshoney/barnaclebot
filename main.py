@@ -7,11 +7,11 @@ import sys
 from configparser import ConfigParser
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-# from telegram import ParseMode
 
 # Import plugins
 sys.path.append('plugins')
 from urbandictionary import UrbanDictionary
+from dictionaryapi import DictionaryAPI
 
 # Read and parse configuration file.
 parser = ConfigParser()
@@ -54,6 +54,23 @@ def urban_dictionary(update, context):
                               disable_web_page_preview=True)
 
 
+def dictionary_api(update, context):
+    words = " ".join(context.args)
+    dict = DictionaryAPI(words)
+    for meaning in dict.get_meaning():
+        speech = meaning['speech']
+        definition = meaning['definition']
+        example = meaning['example']
+
+        text = f'*Meaning of "{words.title()}" as {speech.title()}:*\n' + f'{definition}\n\n' + f'_Example:_\n{example}'
+        update.message.reply_text(text=text, parse_mode='markdown')
+
+
+# def dictionary_synonym(update, context):
+#     words = " ".join(context.args)
+#     dict = DictionaryAPI(words)
+
+
 def main():
     """Start the bot."""
     updater = Updater(parser.get('core', 'token'), use_context=True)
@@ -64,7 +81,9 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("urbandict", urban_dictionary))
+    dp.add_handler(CommandHandler("slang", urban_dictionary))
+    dp.add_handler(CommandHandler("meaning", dictionary_api))
+    # dp.add_handler(CommandHandler("synonym", dictionary_synonym))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
