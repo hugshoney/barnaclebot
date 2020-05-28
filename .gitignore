@@ -1,2 +1,3 @@
 /venv/
 /plugins/__pycache__/
+/plugins/dummy.py
