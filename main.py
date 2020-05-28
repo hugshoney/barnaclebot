@@ -46,6 +46,7 @@ def error(update, context):
 
 
 def urban_dictionary(update, context):
+    """Send a defined slang words when the command /slang is issued."""
     words = " ".join(context.args)
     dict = UrbanDictionary(words)
     result = f'<b>Top definition of <a href="https://www.urbandictionary.com/define.php?term={words}">{words.title()}</a>:</b>\n{dict.get_definition()}\n\n<i>Example:</i>\n{dict.get_example()}'
@@ -55,6 +56,7 @@ def urban_dictionary(update, context):
 
 
 def dictionary_api(update, context):
+    """Send a meaning of the word when the command /mean is issued."""
     words = " ".join(context.args)
     dict = DictionaryAPI(words)
     for meaning in dict.get_meaning():
@@ -69,9 +71,12 @@ def dictionary_api(update, context):
         update.message.reply_text(text=text, parse_mode='markdown')
 
 
-# def dictionary_synonym(update, context):
-#     words = " ".join(context.args)
-#     dict = DictionaryAPI(words)
+def dictionary_synonym(update, context):
+    words = " ".join(context.args)
+    dict = DictionaryAPI(words)
+    list_synonyms = dict.get_synonyms()
+    result = f'*Synonyms of "{words.title()}":*\n_{", ".join(list_synonyms)}_.'
+    update.message.reply_text(text=result, parse_mode='markdown')
 
 
 def main():
@@ -86,7 +91,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("slang", urban_dictionary))
     dp.add_handler(CommandHandler("mean", dictionary_api))
-    # dp.add_handler(CommandHandler("synonym", dictionary_synonym))
+    dp.add_handler(CommandHandler("synonym", dictionary_synonym))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
