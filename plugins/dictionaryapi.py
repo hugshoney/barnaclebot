@@ -24,8 +24,14 @@ class DictionaryAPI:
 
     def get_synonyms(self):
         """Get synonyms of the word"""
-        dict_result = self.get_response(1)
-        synonyms = dict_result[0]['meaning']['noun'][0]['synonyms']
+        dict_result = self.get_response()
+        # synonyms = dict_result[0]['meaning']['noun'][0]['synonyms']
+        synonyms = []
+        for i in range(len(dict_result[0]['meanings'])):
+            list_meanings = dict_result[0]['meanings'][i]['definitions'][0]
+            if 'synonyms' in list_meanings:
+                for word in list_meanings['synonyms']:
+                    synonyms.append(word)
 
         return synonyms
 
