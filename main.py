@@ -62,7 +62,10 @@ def dictionary_api(update, context):
         definition = meaning['definition']
         example = meaning['example']
 
-        text = f'*Meaning of "{words.title()}" as {speech.title()}:*\n' + f'{definition}\n\n' + f'_Example:_\n{example}'
+        if example is None:
+            text = f'*Meaning of "{words.title()}" as {speech.title()}:*\n' + f'{definition}\n\n'
+        else:
+            text = f'*Meaning of "{words.title()}" as {speech.title()}:*\n' + f'{definition}\n\n' + f'_Example:_\n{example}'
         update.message.reply_text(text=text, parse_mode='markdown')
 
 
@@ -82,7 +85,7 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("slang", urban_dictionary))
-    dp.add_handler(CommandHandler("meaning", dictionary_api))
+    dp.add_handler(CommandHandler("mean", dictionary_api))
     # dp.add_handler(CommandHandler("synonym", dictionary_synonym))
 
     # on noncommand i.e message - echo the message on Telegram

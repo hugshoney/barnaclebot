@@ -37,7 +37,10 @@ class DictionaryAPI:
             for meaning in dict_result[0]['meanings']:
                 speech = meaning['partOfSpeech']
                 definition = meaning['definitions'][0]['definition']
-                example = meaning['definitions'][0]['example']
+                if 'example' in meaning['definitions'][0]:
+                    example = meaning['definitions'][0]['example']
+                else:
+                    example = None
                 result = {
                     'speech': speech,
                     'definition': definition,
