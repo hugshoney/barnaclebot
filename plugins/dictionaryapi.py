@@ -9,7 +9,8 @@ class DictionaryAPI:
 
     def get_response(self, version=2):
         """Get full result and return"""
-        url = f'https://api.dictionaryapi.dev/api/v{version}/entries/en/{self.word}'
+        url = f'https://api.dictionaryapi.dev/api/v{version}' \
+              f'/entries/en/{self.word}'
         r = requests.get(url)
         response = r.json()
 
@@ -25,7 +26,6 @@ class DictionaryAPI:
     def get_synonyms(self):
         """Get synonyms of the word"""
         dict_result = self.get_response()
-        # synonyms = dict_result[0]['meaning']['noun'][0]['synonyms']
         synonyms = []
         for i in range(len(dict_result[0]['meanings'])):
             list_meanings = dict_result[0]['meanings'][i]['definitions'][0]
