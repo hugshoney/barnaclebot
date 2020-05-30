@@ -35,32 +35,26 @@ class DictionaryAPI:
 
         return synonyms
 
-    def get_meaning(self, example=True):
+    def get_meaning(self, add_example=True):
         """Get meaning of the word"""
         dict_result = self.get_response()
         meanings = []
-        if example == True:
-            for meaning in dict_result[0]['meanings']:
-                speech = meaning['partOfSpeech']
-                definition = meaning['definitions'][0]['definition']
-                if 'example' in meaning['definitions'][0]:
-                    example = meaning['definitions'][0]['example']
-                else:
-                    example = None
-                result = {
-                    'speech': speech,
-                    'definition': definition,
-                    'example': example
-                }
-                meanings.append(result)
-        else:
-            for meaning in dict_result[0]['meanings']:
-                speech = meaning['partOfSpeech']
-                definition = meaning['definitions'][0]['definition']
-                result = {
-                    'speech': speech,
-                    'definition': definition,
-                }
-                meanings.append(result)
+        for meaning in dict_result[0]['meanings']:
+            speech = meaning['partOfSpeech']
+            definition = meaning['definitions'][0]['definition']
+            if 'example' in meaning['definitions'][0]:
+                example = meaning['definitions'][0]['example']
+            else:
+                example = None
+
+            result = {
+                'speech': speech,
+                'definition': definition,
+            }
+
+            if add_example is True:
+                result['example'] = example
+
+            meanings.append(result)
 
         return meanings
