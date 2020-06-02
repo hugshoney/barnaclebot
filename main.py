@@ -12,6 +12,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 sys.path.append('plugins')
 from urbandictionary import UrbanDictionary
 from dictionaryapi import DictionaryAPI
+from typefit import Quotes
 
 # Read and parse configuration file.
 parser = ConfigParser()
@@ -80,6 +81,13 @@ def dictionary_synonym(update, context):
     update.message.reply_text(text=result, parse_mode='markdown')
 
 
+def random_quote(update, context):
+    """Send a random quote when the command /quote is issued."""
+    quote = Quotes().get_quote()
+    result = f"“_{quote[0]['text']}_”\n\n*{quote[0]['author']}*"
+    update.message.reply_text(text=result, parse_mode='markdown')
+
+
 def main():
     """Start the bot."""
     updater = Updater(parser.get('core', 'token'), use_context=True)
@@ -93,6 +101,7 @@ def main():
     dp.add_handler(CommandHandler("slang", urban_dictionary))
     dp.add_handler(CommandHandler("mean", dictionary_api))
     dp.add_handler(CommandHandler("synonym", dictionary_synonym))
+    dp.add_handler(CommandHandler("quote", random_quote))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
