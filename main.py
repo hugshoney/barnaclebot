@@ -72,6 +72,7 @@ def dictionary_api(update, context):
 
 
 def dictionary_synonym(update, context):
+    """Send synonyms of the word when the command /synonym is issued."""
     words = " ".join(context.args)
     dict = DictionaryAPI(words)
     list_synonyms = dict.get_synonyms()
