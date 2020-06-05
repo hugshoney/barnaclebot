@@ -13,7 +13,7 @@ class Quotes:
 
     def get_response(self):
         """Get full result and return"""
-        url = f'https://type.fit/api/quotes'
+        url = 'https://type.fit/api/quotes'
         r = requests.get(url)
         response = r.json()
 
