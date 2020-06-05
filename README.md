@@ -13,6 +13,7 @@ I always want to learn English but I'm so unmotivated, and I want to learn Pytho
 - `/slang <word>`: Get slang definition of the word.
 - `/synonym <word>`: Get synonyms of the word.
 - `/quote`: Get random quotes.
+- `/random`: Get random word.
 
 ## Emoji Commit Message Guide
 I have personal emoji guide when writting commit message. This is a general Emoji that I often use:

@@ -16,6 +16,7 @@ sys.path.append('plugins')
 from urbandictionary import UrbanDictionary
 from dictionaryapi import DictionaryAPI
 from typefit import Quotes
+from webster import Words
 
 # Read and parse configuration file.
 parser = ConfigParser()
@@ -91,6 +92,13 @@ def random_quote(update, context):
     update.message.reply_text(text=result, parse_mode='markdown')
 
 
+def random_word(update, context):
+    """Send a random quote when the command /quote is issued."""
+    word = Words().get_word()
+    result = f"Random word: *{word.title()}*"
+    update.message.reply_text(text=result, parse_mode='markdown')
+
+
 def main():
     """Start the bot."""
     updater = Updater(parser.get('core', 'token'), use_context=True)
@@ -105,6 +113,7 @@ def main():
     dp.add_handler(CommandHandler("mean", dictionary_api))
     dp.add_handler(CommandHandler("synonym", dictionary_synonym))
     dp.add_handler(CommandHandler("quote", random_quote))
+    dp.add_handler(CommandHandler("random", random_word))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
