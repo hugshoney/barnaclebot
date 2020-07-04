@@ -27,4 +27,11 @@ func TestSlang(t *testing.T) {
 
 		assertCorrectMessage(t, got, want)
 	})
+
+	t.Run("Get no result for 'awokwok'", func(t *testing.T) {
+		nodef, _ := slang("awokwok")
+		got := nodef
+		want := "awokwok is not found, try another day."
+		assertCorrectMessage(t, got, want)
+	})
 }

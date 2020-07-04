@@ -33,7 +33,13 @@ func slang(word string) (definition, example string) {
 	var jsonResult Response
 	json.Unmarshal(body, &jsonResult)
 
-	definition = jsonResult.List[0].Define
-	example = jsonResult.List[0].Example
+	if len(jsonResult.List) == 0 {
+		definition = fmt.Sprintf("%s is not found, try another day.", word)
+		example = ""
+	} else {
+		definition = jsonResult.List[0].Define
+		example = jsonResult.List[0].Example
+	}
+
 	return
 }
