@@ -16,7 +16,8 @@ type Response struct {
 	List []Definition `json:"list"`
 }
 
-func slang(word string) Response {
+// Get definition and example of slang word.
+func slang(word string) (definition, example string) {
 	url := fmt.Sprint("http://api.urbandictionary.com/v0/define?term=", word)
 
 	res, err := http.Get(url)
@@ -32,19 +33,7 @@ func slang(word string) Response {
 	var jsonResult Response
 	json.Unmarshal(body, &jsonResult)
 
-	return jsonResult
-}
-
-func slangDef(word string) string {
-	result := slang(word)
-	top := result.List[0].Define
-
-	return top
-}
-
-func slangEg(word string) string {
-	result := slang(word)
-	top := result.List[0].Example
-
-	return top
+	definition = jsonResult.List[0].Define
+	example = jsonResult.List[0].Example
+	return
 }
