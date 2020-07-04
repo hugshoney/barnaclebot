@@ -2,49 +2,49 @@ package main
 
 import (
 	"encoding/json"
-    "fmt"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 )
 
-type Slang struct {
-	Definition string `json:"definition"`
+type Definition struct {
+	Define  string `json:"definition"`
 	Example string `json:"example"`
 }
 
-type SlangResult struct {
-    List []Slang `json:"list"`
+type Response struct {
+	List []Definition `json:"list"`
 }
 
-func GetSlang(word string) SlangResult {
-    url := fmt.Sprint("http://api.urbandictionary.com/v0/define?term=",  word)
-    
-    res, err := http.Get(url)
-    if err != nil {
-        panic(err.Error())
-    }
-    
-    body, err := ioutil.ReadAll(res.Body)
-    if err != nil {
-        panic(err.Error())
-    }
-    
-    var jsonResult SlangResult
-    json.Unmarshal(body, &jsonResult)
-    
-    return jsonResult
+func slang(word string) Response {
+	url := fmt.Sprint("http://api.urbandictionary.com/v0/define?term=", word)
+
+	res, err := http.Get(url)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	var jsonResult Response
+	json.Unmarshal(body, &jsonResult)
+
+	return jsonResult
 }
 
-func SlangDef(word string) string {
-    result := GetSlang(word)
-    top := result.List[0].Definition
-    
-    return top
+func slangDef(word string) string {
+	result := slang(word)
+	top := result.List[0].Define
+
+	return top
 }
 
-func SlangEg(word string) string {
-    result := GetSlang(word)
-    top := result.List[0].Example
-    
-    return top
+func slangEg(word string) string {
+	result := slang(word)
+	top := result.List[0].Example
+
+	return top
 }
