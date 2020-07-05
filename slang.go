@@ -11,16 +11,18 @@ import (
 	"net/http"
 )
 
+// Structuring JSON for definition and example of slang word.
 type Definition struct {
 	Define  string `json:"definition"`
 	Example string `json:"example"`
 }
 
+// Structuring JSON for list of definition and example result.
 type Response struct {
 	List []Definition `json:"list"`
 }
 
-// Get definition and example of slang word.
+// Get definition and example of slang word from UrbanDictionary API.
 func slang(word string) (definition, example string) {
 	url := fmt.Sprint("http://api.urbandictionary.com/v0/define?term=", word)
 
@@ -37,6 +39,9 @@ func slang(word string) (definition, example string) {
 	var jsonResult Response
 	json.Unmarshal(body, &jsonResult)
 
+	// Give information if slang word not found in result.
+	// I'm using len because I don't know to handle empty struct or
+	// maybe it's just nil slice, I'm confused -_-.
 	if len(jsonResult.List) == 0 {
 		definition = fmt.Sprintf("%s is not found, try another day.", word)
 		example = ""
