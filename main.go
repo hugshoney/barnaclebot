@@ -2,7 +2,10 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-// Barnacle Bot is Telegram bot that I use to help myself learn English while learning Go and vice versa. My English is still sucks, and my Go programming skill is still horrible.
+// Barnacle Bot is Telegram bot that I use to help myself
+// learn English while learning Go and vice versa.
+// My English is still sucks, and my Go programming skill
+// is still horrible.
 package main
 
 import (
