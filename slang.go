@@ -43,7 +43,7 @@ func slang(word string) (definition, example string) {
 	// I'm using len because I don't know to handle empty struct or
 	// maybe it's just nil slice, I'm confused -_-.
 	if len(jsonResult.List) == 0 {
-		definition = fmt.Sprintf("%s is not found, try another day.", word)
+		definition = fmt.Sprintf("Definition of \"%s\" is not found, try another day.", word)
 		example = ""
 	} else {
 		definition = jsonResult.List[0].Define

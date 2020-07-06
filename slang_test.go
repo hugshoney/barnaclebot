@@ -42,7 +42,7 @@ func TestSlang(t *testing.T) {
         // Call slang function to find definition of 'awokwok'
 		nodef, _ := slang("awokwok")
 		got := nodef
-		want := "awokwok is not found, try another day."
+		want := "Definition of \"awokwok\" is not found, try another day."
 		assertCorrectMessage(t, got, want)
 	})
 }
