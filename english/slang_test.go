@@ -1,7 +1,7 @@
 // Any copyright is dedicated to the Public Domain.
 // https://creativecommons.org/publicdomain/zero/1.0/
 
-package main
+package english
 
 import (
 	"testing"
@@ -18,7 +18,7 @@ func TestSlang(t *testing.T) {
 
 	// Call slang function to return top definition (def)
 	// and example (eg).
-	def, eg := slang("thot")
+	def, eg := Slang("thot")
 
 	// Test to know if got definition is same with what I want.
 	t.Run("Get definition of 'thot'", func(t *testing.T) {
@@ -40,7 +40,7 @@ func TestSlang(t *testing.T) {
 	// of slang word that I want to know.
 	t.Run("Get no result for 'awokwok'", func(t *testing.T) {
 		// Call slang function to find definition of 'awokwok'
-		nodef, _ := slang("awokwok")
+		nodef, _ := Slang("awokwok")
 		got := nodef
 		want := "Definition of \"awokwok\" is not found, try another day."
 		assertCorrectMessage(t, got, want)

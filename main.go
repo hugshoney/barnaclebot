@@ -13,6 +13,7 @@ import (
 	"os"
 	"time"
 
+    en "github.com/hugshoney/barnaclebot/english"
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
@@ -37,7 +38,7 @@ func main() {
 	b.Handle("/slang", func(m *tb.Message) {
 		// Call slang function and take user word as argument and
 		// return top result of definition (def) and example (eg).
-		def, eg := slang(m.Payload)
+		def, eg := en.Slang(m.Payload)
 		// Formating definition text with adding bold header on top of it.
 		fullText := fmt.Sprintf("<b>Definition of %q:</b>\n%s", m.Payload, def)
 		// Send definition of slang word with HTML parse mode.

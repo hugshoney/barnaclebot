@@ -2,7 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-package main
+package english
 
 import (
 	"encoding/json"
@@ -23,7 +23,7 @@ type Response struct {
 }
 
 // Get definition and example of slang word from UrbanDictionary API.
-func slang(word string) (definition, example string) {
+func Slang(word string) (definition, example string) {
 	url := fmt.Sprint("http://api.urbandictionary.com/v0/define?term=", word)
 
 	res, err := http.Get(url)
