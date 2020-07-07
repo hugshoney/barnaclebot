@@ -52,6 +52,7 @@ func Mean(word string) []map[string]string {
 	var result []map[string]string
 	// If definition of word found in Dictionary,
 	// let's process it to be nice slice of map.
+	// TODO it's not really nice slice, btw. Refactor please.
 	if len(jsonResult) != 0 {
 		var speech, definition, example string
 		// Loops list items in dictionary result. I know
@@ -64,13 +65,13 @@ func Mean(word string) []map[string]string {
 			// what I got from API, so I just process it.
 			for _, word := range item.Definitions {
 				definition = word.Mean
-				if word.Example != "" {
-					example = word.Example
-				}
+
 				// If example usage of word exist, let's
 				// add it to map.
 				// This code looks real bad, it's need rewriten.
-				if example != "" {
+				if word.Example != "" {
+					example = word.Example
+
 					result = append(result, map[string]string{
 						"speech":     speech,
 						"definition": definition,
