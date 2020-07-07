@@ -13,7 +13,7 @@ import (
 	"os"
 	"time"
 
-    en "github.com/hugshoney/barnaclebot/english"
+	en "github.com/hugshoney/barnaclebot/english"
 	tb "gopkg.in/tucnak/telebot.v2"
 )
 
@@ -47,6 +47,41 @@ func main() {
 		if eg != "" {
 			fullEg := fmt.Sprintf("<b>Example of %q:</b>\n%s", m.Payload, eg)
 			b.Send(m.Sender, fullEg, tb.ModeHTML)
+		}
+	})
+
+	// Send list result of definition and example use
+	// of the word, when command /mean is issued.
+	b.Handle("/mean", func(m *tb.Message) {
+		// Call mean function from english package.
+		// Take word from user as argument for function,
+		// and return with slice of map.
+		result := en.Mean(m.Payload)
+		// If result for the word exists, let's process.
+		if len(result) != 0 {
+			// Iterate list of result, and then process and
+			// reply back to user.
+			for _, item := range result {
+				if eg, exists := item["example"]; exists {
+					fullText := fmt.Sprintf("<b>Definition of %q as %s:</b>\n%s\n\n<i>Example:</i>\n%s",
+						m.Payload,
+						item["speech"],
+						item["definition"],
+						eg,
+					)
+					b.Send(m.Sender, fullText, tb.ModeHTML)
+				} else {
+					fullText := fmt.Sprintf("<b>Definition of %q as %s:</b>\n%s",
+						m.Payload,
+						item["speech"],
+						item["definition"],
+					)
+					b.Send(m.Sender, fullText, tb.ModeHTML)
+				}
+			}
+		} else {
+			notfound := fmt.Sprintf("%q not found, try another day.", m.Payload)
+			b.Send(m.Sender, notfound)
 		}
 	})
 
