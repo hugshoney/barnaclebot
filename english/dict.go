@@ -30,8 +30,10 @@ type DictResponse struct {
 
 // Function to get word meaning, example, and part of speech.
 func Mean(word string) []map[string]string {
+	// I think I don't need to use fmt to handle some thing like this.
 	url := fmt.Sprint("https://api.dictionaryapi.dev/api/v2/entries/en/", word)
 
+	// I think, I need to rename 'res' with 'response'.
 	res, err := http.Get(url)
 	if err != nil {
 		panic(err.Error())
@@ -45,16 +47,29 @@ func Mean(word string) []map[string]string {
 	var jsonResult []DictResponse
 	json.Unmarshal(body, &jsonResult)
 
+	// Variable to hold list result of definition,
+	// example, and speech. Probably I will add synonyms.
 	var result []map[string]string
+	// If definition of word found in Dictionary,
+	// let's process it to be nice slice of map.
 	if len(jsonResult) != 0 {
 		var speech, definition, example string
+		// Loops list items in dictionary result. I know
+		// it's looks stupid, but it's work!.
 		for _, item := range jsonResult[0].Meanings {
 			speech = item.Speech
+			// Sometimes some speech have more than one
+			// of definition and example, I don't know
+			// why this thing can happen, but this is
+			// what I got from API, so I just process it.
 			for _, word := range item.Definitions {
 				definition = word.Mean
 				if word.Example != "" {
 					example = word.Example
 				}
+				// If example usage of word exist, let's
+				// add it to map.
+				// This code looks real bad, it's need rewriten.
 				if example != "" {
 					result = append(result, map[string]string{
 						"speech":     speech,

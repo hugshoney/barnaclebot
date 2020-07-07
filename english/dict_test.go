@@ -22,6 +22,7 @@ func TestMean(t *testing.T) {
 			},
 		}
 
+		// Compare slice between what I got and what I want.
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("got %v want %v", got, want)
 		}
