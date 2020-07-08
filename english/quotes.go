@@ -6,24 +6,15 @@ package english
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"math/rand"
-	"net/http"
 	"time"
 )
 
 func Quotes() map[string]string {
-	url := "https://type.fit/api/quotes"
-	response, err := http.Get(url)
-	if err != nil {
-		panic(err.Error())
-	}
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		panic(err.Error())
-	}
+	data := GetData("https://type.fit/api/quotes", "")
+
 	var jsonResult []map[string]string
-	json.Unmarshal([]byte(body), &jsonResult)
+	json.Unmarshal(data, &jsonResult)
 
 	// Create random seed using unix time.
 	rand.Seed(time.Now().Unix())

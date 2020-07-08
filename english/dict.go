@@ -4,11 +4,7 @@
 
 package english
 
-import (
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
-)
+import "encoding/json"
 
 // Struct for word meaning and example.
 type Word struct {
@@ -29,19 +25,10 @@ type DictResponse struct {
 
 // Function to get word meaning, example, and part of speech.
 func Mean(word string) []map[string]string {
-	// TODO it's need to written in somewhere else.
-	// It's already written so many times, I need function to call this thing.
-	url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + word
-	response, err := http.Get(url)
-	if err != nil {
-		panic(err.Error())
-	}
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		panic(err.Error())
-	}
+	data := GetData("https://api.dictionaryapi.dev/api/v2/entries/en/", word)
+
 	var jsonResult []DictResponse
-	json.Unmarshal(body, &jsonResult)
+	json.Unmarshal(data, &jsonResult)
 
 	// Variable to hold list result of definition,
 	// example, and speech. Probably I will add synonyms.

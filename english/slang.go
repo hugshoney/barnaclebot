@@ -7,8 +7,6 @@ package english
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
 )
 
 // Structuring JSON for definition and example of slang word.
@@ -24,18 +22,10 @@ type SlangResponse struct {
 
 // Get definition and example of slang word from UrbanDictionary API.
 func Slang(word string) (definition, example string) {
-	url := "http://api.urbandictionary.com/v0/define?term=" + word
-	response, err := http.Get(url)
-	if err != nil {
-		panic(err.Error())
-	}
-	body, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		panic(err.Error())
-	}
+	data := GetData("http://api.urbandictionary.com/v0/define?term=", word)
 
 	var jsonResult SlangResponse
-	json.Unmarshal(body, &jsonResult)
+	json.Unmarshal(data, &jsonResult)
 
 	// Give information if slang word not found in result.
 	// I'm using len because I don't know to handle empty struct or
