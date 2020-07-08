@@ -85,5 +85,20 @@ func main() {
 		}
 	})
 
+	// Send random quotes when /quote command is issued.
+	b.Handle("/quote", func(m *tb.Message) {
+		// Call quotes function to get random
+		// map of quotes.
+		quotes := en.Quotes()
+		var fullText string
+		// If author of quotes exists, append to bottom of text.
+		if author, exist := quotes["author"]; exist {
+			fullText = fmt.Sprintf("<i>%q</i>\n\n%s", quotes["text"], author)
+		} else {
+			fullText = fmt.Sprintf("<i>%q</i>", quotes["text"])
+		}
+		b.Send(m.Sender, fullText, tb.ModeHTML)
+	})
+
 	b.Start()
 }
