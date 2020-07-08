@@ -23,7 +23,7 @@ type DictResponse struct {
 	Meanings []DictResult `json:"meanings"`
 }
 
-// Function to get word meaning, example, and part of speech.
+// Get word meaning, example, and part of speech from word.
 func Mean(word string) []map[string]string {
 	data := GetData("https://api.dictionaryapi.dev/api/v2/entries/en/", word)
 
