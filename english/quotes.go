@@ -14,22 +14,20 @@ import (
 
 func Quotes() map[string]string {
 	url := "https://type.fit/api/quotes"
-
-	// I think, I need to rename 'res' with 'response'.
-	res, err := http.Get(url)
+	response, err := http.Get(url)
 	if err != nil {
 		panic(err.Error())
 	}
-
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		panic(err.Error())
 	}
-
 	var jsonResult []map[string]string
 	json.Unmarshal([]byte(body), &jsonResult)
 
+	// Create random seed using unix time.
 	rand.Seed(time.Now().Unix())
+	// Select random quotes text from list all quotes.
 	quotes := jsonResult[rand.Intn(len(jsonResult))]
 
 	return quotes

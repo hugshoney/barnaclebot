@@ -6,7 +6,6 @@ package english
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -30,20 +29,17 @@ type DictResponse struct {
 
 // Function to get word meaning, example, and part of speech.
 func Mean(word string) []map[string]string {
-	// I think I don't need to use fmt to handle some thing like this.
-	url := fmt.Sprint("https://api.dictionaryapi.dev/api/v2/entries/en/", word)
-
-	// I think, I need to rename 'res' with 'response'.
-	res, err := http.Get(url)
+	// TODO it's need to written in somewhere else.
+	// It's already written so many times, I need function to call this thing.
+	url := "https://api.dictionaryapi.dev/api/v2/entries/en/" + word
+	response, err := http.Get(url)
 	if err != nil {
 		panic(err.Error())
 	}
-
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		panic(err.Error())
 	}
-
 	var jsonResult []DictResponse
 	json.Unmarshal(body, &jsonResult)
 

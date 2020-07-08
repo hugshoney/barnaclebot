@@ -12,31 +12,29 @@ import (
 )
 
 // Structuring JSON for definition and example of slang word.
-type Definition struct {
+type SlangWord struct {
 	Define  string `json:"definition"`
 	Example string `json:"example"`
 }
 
 // Structuring JSON for list of definition and example result.
-type Response struct {
-	List []Definition `json:"list"`
+type SlangResponse struct {
+	List []SlangWord `json:"list"`
 }
 
 // Get definition and example of slang word from UrbanDictionary API.
 func Slang(word string) (definition, example string) {
-	url := fmt.Sprint("http://api.urbandictionary.com/v0/define?term=", word)
-
-	res, err := http.Get(url)
+	url := "http://api.urbandictionary.com/v0/define?term=" + word
+	response, err := http.Get(url)
+	if err != nil {
+		panic(err.Error())
+	}
+	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		panic(err.Error())
 	}
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		panic(err.Error())
-	}
-
-	var jsonResult Response
+	var jsonResult SlangResponse
 	json.Unmarshal(body, &jsonResult)
 
 	// Give information if slang word not found in result.
