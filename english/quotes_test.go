@@ -10,6 +10,6 @@ func TestQuotes(t *testing.T) {
 	result := Quotes()
 	// Check if quotes text exist or not in result.
 	if _, exist := result["text"]; !exist {
-		t.Errorf("key for quotes text is not found in result.")
+		t.Errorf("value for quotes text is not found in result.")
 	}
 }

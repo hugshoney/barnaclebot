@@ -30,7 +30,7 @@ func Slang(word string) (definition, example string) {
 	// Give information if slang word not found in result.
 	// I'm using len because I don't know to handle empty struct or
 	// maybe it's just nil slice, I'm confused -_-.
-    // TODO i'ts really bad handling, refactor please.
+	// TODO i'ts really bad handling, refactor please.
 	if len(jsonResult.List) == 0 {
 		definition = fmt.Sprintf("Definition of \"%s\" is not found, try another day.", word)
 		example = ""
