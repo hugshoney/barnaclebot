@@ -18,11 +18,11 @@ func TestSlang(t *testing.T) {
 
 	// Call slang function to return top definition (def)
 	// and example (eg).
-	def, eg := Slang("thot")
+	slang := Slang("thot")
 
 	// Test to know if got definition is same with what I want.
 	t.Run("Get definition of 'thot'", func(t *testing.T) {
-		got := def
+		got := slang["definition"]
 		want := "Pronounced \\ˈthȯt\\ and taken from THree - One - Two. The original version of THOT before someone came to think it meant something else. It was brought to you by THOTCON, a hacking [conference] based in Chicago [IL], USA which started in 2010.\n\nFor those that aren't [believers], check out the thotcon website or wikipedia."
 
 		assertCorrectMessage(t, got, want)
@@ -30,7 +30,7 @@ func TestSlang(t *testing.T) {
 
 	// Test to know if got example is same with what I want.
 	t.Run("Get example of 'thot'", func(t *testing.T) {
-		got := eg
+		got := slang["example"]
 		want := "Damn, THOT CON is absolutely [bad-ass].\n\nThose THOT [IES] really are some of the best [hackers] in the world."
 
 		assertCorrectMessage(t, got, want)
@@ -40,9 +40,10 @@ func TestSlang(t *testing.T) {
 	// of slang word that I want to know.
 	t.Run("Get no result for 'awokwok'", func(t *testing.T) {
 		// Call slang function to find definition of 'awokwok'
-		nodef, _ := Slang("awokwok")
-		got := nodef
-		want := "Definition of \"awokwok\" is not found, try another day."
-		assertCorrectMessage(t, got, want)
+		notSlang := "awokwok"
+		slang := Slang(notSlang)
+		if len(slang) != 0 {
+			t.Errorf("%s is not slang", notSlang)
+		}
 	})
 }
