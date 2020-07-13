@@ -14,7 +14,7 @@ func TestMean(t *testing.T) {
 	// for 'homeless' word.
 	got := Mean("homeless")
 	want := []map[string]string{
-		map[string]string{
+		{
 			"speech":     "adjective",
 			"definition": "(of a person) without a home, and therefore typically living on the streets.",
 			"example":    "the plight of young homeless people",
