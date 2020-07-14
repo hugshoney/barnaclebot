@@ -66,15 +66,15 @@ func main() {
 			// reply back to user.
 			for _, item := range result {
 				text := []string{}
-				header := fmt.Sprintf("<b>%s as %s</b>\n", strings.Title(m.Payload), strings.Title(item.Speech))
+				header := fmt.Sprintf("<b>%s as %s</b>", strings.Title(m.Payload), strings.Title(item.Speech))
 				text = append(text, header)
 
 				for _, word := range item.Definitions {
-					definition := fmt.Sprintf("- %s", word.Mean)
+					definition := fmt.Sprintf("• %s", word.Mean)
 
 					text = append(text, definition)
 					if word.Example != "" {
-						example := fmt.Sprintf("  <i>%s</i>", word.Example)
+						example := fmt.Sprintf("  <i>%q</i>", word.Example)
 						text = append(text, example)
 					}
 				}
