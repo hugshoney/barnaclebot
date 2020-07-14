@@ -63,6 +63,7 @@ func main() {
 		// Take word from user as argument for function,
 		// and return with slice of map.
 		result := en.Mean(m.Payload)
+		var fullText string
 		// If result for the word exists, let's process.
 		if len(result) != 0 {
 			// Iterate list of result, and then process and
@@ -81,14 +82,14 @@ func main() {
 						text = append(text, example)
 					}
 				}
-				fullText := strings.Join(text[:], "\n")
+				fullText = strings.Join(text[:], "\n")
 
 				b.Send(m.Sender, fullText, tb.ModeHTML)
 			}
 
 		} else {
-			notfound := fmt.Sprintf("%q not found, try another day.", m.Payload)
-			b.Send(m.Sender, notfound)
+			fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			b.Send(m.Sender, fullText)
 		}
 	})
 
