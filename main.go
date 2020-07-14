@@ -11,6 +11,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	en "github.com/hugshoney/barnaclebot/english"
@@ -62,23 +63,24 @@ func main() {
 			// Iterate list of result, and then process and
 			// reply back to user.
 			for _, item := range result {
-				if eg, exists := item["example"]; exists {
-					fullText := fmt.Sprintf("<b>Definition of %q as %s:</b>\n%s\n\n<i>Example:</i>\n%s",
-						m.Payload,
-						item["speech"],
-						item["definition"],
-						eg,
-					)
-					b.Send(m.Sender, fullText, tb.ModeHTML)
-				} else {
-					fullText := fmt.Sprintf("<b>Definition of %q as %s:</b>\n%s",
-						m.Payload,
-						item["speech"],
-						item["definition"],
-					)
-					b.Send(m.Sender, fullText, tb.ModeHTML)
+				text := []string{}
+				header := fmt.Sprintf("<b>%s as %s</b>\n", strings.Title(m.Payload), strings.Title(item.Speech))
+				text = append(text, header)
+
+				for _, word := range item.Definitions {
+					definition := fmt.Sprintf("- %s", word.Mean)
+
+					text = append(text, definition)
+					if word.Example != "" {
+						example := fmt.Sprintf("  <i>%s</i>", word.Example)
+						text = append(text, example)
+					}
 				}
+				fullText := strings.Join(text[:], "\n")
+
+				b.Send(m.Sender, fullText, tb.ModeHTML)
 			}
+
 		} else {
 			notfound := fmt.Sprintf("%q not found, try another day.", m.Payload)
 			b.Send(m.Sender, notfound)

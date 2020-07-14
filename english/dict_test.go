@@ -13,12 +13,16 @@ func TestMean(t *testing.T) {
 	// Get dictionary result (speech, definition, and example)
 	// for 'homeless' word.
 	got := Mean("homeless")
-	want := []map[string]string{
+
+	want := []Dict{
 		{
-			"speech":     "adjective",
-			"definition": "(of a person) without a home, and therefore typically living on the streets.",
-			"example":    "the plight of young homeless people",
-		},
+			Speech: "adjective",
+			Definitions: []Word{
+				{
+					Mean:    "(of a person) without a home, and therefore typically living on the streets.",
+					Example: "the plight of young homeless people",
+				},
+			}},
 	}
 
 	// Compare slice between what I got and what I want.
