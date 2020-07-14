@@ -40,16 +40,19 @@ func main() {
 		// Call slang function and take user word as argument and
 		// return top result of definition (def) and example (eg).
 		result := en.Slang(m.Payload)
-		def := result["definition"]
-		eg := result["example"]
-		// Formating definition text with adding bold header on top of it.
-		fullText := fmt.Sprintf("<b>Definition of %q:</b>\n%s", m.Payload, def)
-		// Send definition of slang word with HTML parse mode.
-		b.Send(m.Sender, fullText, tb.ModeHTML)
-		// If example exists, also send example text.
-		if eg != "" {
-			fullEg := fmt.Sprintf("<b>Example of %q:</b>\n%s", m.Payload, eg)
-			b.Send(m.Sender, fullEg, tb.ModeHTML)
+		var fullText string
+		if len(result) != 0 {
+			// If example exists, also send example text.
+			if eg, exist := result["example"]; exist {
+				fullText = fmt.Sprintf("<b>%s:</b>\n%s\n\n<i>\"%s\"</i>", strings.Title(m.Payload), result["definition"], eg)
+			} else {
+				fullText = fmt.Sprintf("<b>%s:</b>\n%s", strings.Title(m.Payload), result["definition"])
+			}
+			// Send definition of slang word with HTML parse mode.
+			b.Send(m.Sender, fullText, tb.ModeHTML)
+		} else {
+			fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			b.Send(m.Sender, fullText)
 		}
 	})
 
