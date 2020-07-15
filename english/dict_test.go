@@ -10,10 +10,11 @@ import (
 
 // Test for Dict function.
 func TestDict(t *testing.T) {
-	// Get dictionary result (speech, definition, and example)
-	// for 'homeless' word.
+	// Get dictionary result like speech, definition, example,
+	// and synonym for 'homeless' word.
 	got := Dict("homeless")
 
+	// the result that I want.
 	want := []Mean{
 		{
 			Speech: "adjective",
