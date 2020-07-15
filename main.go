@@ -29,6 +29,11 @@ func main() {
 		panic(err)
 	}
 
+	// Closure function to create not found message.
+	notFound := func(word string) string {
+		return fmt.Sprintf("Result for %q is not found.\nTry again next time.", word)
+	}
+
 	// Send a message when command /start is issued.
 	b.Handle("/start", func(m *tb.Message) {
 		b.Send(m.Sender, "Hi, buddy.")
@@ -59,7 +64,7 @@ func main() {
 		} else {
 			// If definition of slang word not exist,
 			// send this text to inform user.
-			fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			fullText = notFound(m.Payload)
 			b.Send(m.Sender, fullText)
 		}
 	})
@@ -109,7 +114,7 @@ func main() {
 		} else {
 			// If definition of the word not exist,
 			// send this text to inform user.
-			fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			fullText = notFound(m.Payload)
 			b.Send(m.Sender, fullText)
 		}
 	})
@@ -171,13 +176,13 @@ func main() {
 				fullText = strings.Join(text[:], "\n")
 			} else {
 				// If less than 3, just create not found message.
-				fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+				fullText = notFound(m.Payload)
 			}
 			// Send full message to user.
 			b.Send(m.Sender, fullText, tb.ModeHTML)
 		} else {
 			// If Synonym of the word not exist, send this text to inform user.
-			fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			fullText = notFound(m.Payload)
 			b.Send(m.Sender, fullText)
 		}
 	})
