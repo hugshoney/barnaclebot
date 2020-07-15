@@ -114,6 +114,74 @@ func main() {
 		}
 	})
 
+	// Send list synonym of the word, when command /synonym is issued.
+	// Full Disclosure: HARDCODE.
+	b.Handle("/synonym", func(m *tb.Message) {
+		// Call Dict function from english package.
+		// Take word from user as argument for function,
+		// and return with []Dictionary struct.
+		result := en.Dict(m.Payload)
+		// Create full message variable.
+		var fullText string
+		// Let's the hardcode begin.
+		// If result for the word exists, let's process.
+		if len(result) != 0 {
+			text := []string{}
+			// Create header for message.
+			header := fmt.Sprintf("<b>%s</b>", strings.Title(m.Payload))
+			// Apend header to slice message.
+			text = append(text, header)
+			// Closure function to check if string already exist in slice.
+			contain := func(word string, list []string) bool {
+				for _, item := range list {
+					if word == item {
+						return true
+					}
+				}
+				return false
+			}
+
+			// Iterate list of item in Mean struct.
+			for _, item := range result {
+				// Iterate list of synonyms if exists.
+				for _, word := range item.Definitions {
+					if len(word.Synonym) != 0 {
+						// Create speech of word for message.
+						speech := fmt.Sprintf("\n<i>%s</i>", item.Speech)
+						// Append this thing only if speech is not exist
+						// in slice message.
+						if !contain(speech, text) {
+							// Append text header to text.
+							text = append(text, speech)
+						}
+
+						// Join of all synonyms into one string.
+						synonyms := fmt.Sprintf("• %s", strings.Join(word.Synonym[:], ", "))
+						// Append synonym to slice message.
+						text = append(text, synonyms)
+					}
+				}
+			}
+
+			// Stupid way to check if word synonyms exist in result.
+			// If length of slice message more than or equal to 3, so
+			// the result for sure have synonyms.
+			if len(text) >= 3 {
+				// Join all text as full message.
+				fullText = strings.Join(text[:], "\n")
+			} else {
+				// If less than 3, just create not found message.
+				fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			}
+			// Send full message to user.
+			b.Send(m.Sender, fullText, tb.ModeHTML)
+		} else {
+			// If Synonym of the word not exist, send this text to inform user.
+			fullText = fmt.Sprintf("%q not found, try another day.", m.Payload)
+			b.Send(m.Sender, fullText)
+		}
+	})
+
 	// Send random quotes when /quote command is issued.
 	b.Handle("/quote", func(m *tb.Message) {
 		// Call quotes function to get random
