@@ -67,9 +67,9 @@ func main() {
 	// Send list result of definition and example use
 	// of the word, when command /mean is issued.
 	b.Handle("/mean", func(m *tb.Message) {
-		// Call mean function from english package.
+		// Call Dict function from english package.
 		// Take word from user as argument for function,
-		// and return with slice of map.
+		// and return with []Dictionary struct.
 		result := en.Dict(m.Payload)
 		// Create full message variable.
 		var fullText string
