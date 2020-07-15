@@ -8,19 +8,26 @@ import (
 	"testing"
 )
 
-// Test for Mean function.
-func TestMean(t *testing.T) {
+// Test for Dict function.
+func TestDict(t *testing.T) {
 	// Get dictionary result (speech, definition, and example)
 	// for 'homeless' word.
-	got := Mean("homeless")
+	got := Dict("homeless")
 
-	want := []Dict{
+	want := []Mean{
 		{
 			Speech: "adjective",
 			Definitions: []Word{
 				{
 					Mean:    "(of a person) without a home, and therefore typically living on the streets.",
 					Example: "the plight of young homeless people",
+					Synonym: []string{
+						"without a roof over one's head",
+						"on the streets",
+						"vagrant",
+						"sleeping rough",
+						"living rough",
+					},
 				},
 			}},
 	}
