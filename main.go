@@ -42,11 +42,12 @@ func main() {
 		result := en.Slang(m.Payload)
 		var fullText string
 		if len(result) != 0 {
+			def := result["definition"]
 			// If example exists, also send example text.
 			if eg, exist := result["example"]; exist {
-				fullText = fmt.Sprintf("<b>%s:</b>\n%s\n\n<i>\"%s\"</i>", strings.Title(m.Payload), result["definition"], eg)
+				fullText = fmt.Sprintf("<b>%s</b>\n%s\n\n<i>%s</i>", strings.Title(m.Payload), def, eg)
 			} else {
-				fullText = fmt.Sprintf("<b>%s:</b>\n%s", strings.Title(m.Payload), result["definition"])
+				fullText = fmt.Sprintf("<b>%s</b>\n%s", strings.Title(m.Payload), def)
 			}
 			// Send definition of slang word with HTML parse mode.
 			b.Send(m.Sender, fullText, tb.ModeHTML)
@@ -99,11 +100,12 @@ func main() {
 		// map of quotes.
 		quotes := en.Quotes()
 		var fullText string
+		text := quotes["text"]
 		// If author of quotes exists, append to bottom of text.
 		if author, exist := quotes["author"]; exist {
-			fullText = fmt.Sprintf("<i>%q</i>\n\n%s", quotes["text"], author)
+			fullText = fmt.Sprintf("<i>%q</i>\n\n%s", text, author)
 		} else {
-			fullText = fmt.Sprintf("<i>%q</i>", quotes["text"])
+			fullText = fmt.Sprintf("<i>%q</i>", text)
 		}
 		b.Send(m.Sender, fullText, tb.ModeHTML)
 	})
