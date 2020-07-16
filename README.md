@@ -17,6 +17,6 @@ I always want to learn English but I'm so unmotivated, and I want to learn progr
 
 ## Credit
 - [Telebot](https://github.com/tucnak/telebot/) `MIT License`. Telegram bot framework that I use in this project.
-- [Urban Dictionary](https://www.urbandictionary.com/). I use their API to get definition of sland word.
+- [Urban Dictionary](https://www.urbandictionary.com/). I use their API to get definition of slang word.
 - [(unofficial) Google Dictionary API](https://dictionaryapi.dev/). I use this for `/mean` and `/synonym` command.
 - [Type.fit](https://type.fit/). I ~~steal~~ use their API to get random quotes.
