@@ -1,5 +1,5 @@
 ## Behind the Source Code
-I always want to learn English but I'm so unmotivated, and I want to learn Python programming too, but I'm so lazy. Because of that, I'm trying to learn Python programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :sweat_smile:.
+I always want to learn English but I'm so unmotivated, and I want to learn programming too, but I'm so lazy. Because of that, I'm trying to learn programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :sweat_smile:.
 
 ## Quick Start Setup
 1. Clone the repository. `git clone https://github.com/hugshoney/barnacle-bot.git`
@@ -15,11 +15,8 @@ I always want to learn English but I'm so unmotivated, and I want to learn Pytho
 - `/quote`: Get random quotes.
 - `/random`: Get random word.
 
-## Emoji Commit Message Guide
-I have personal emoji guide when writting commit message. This is a general Emoji that I often use:
-- :pencil: Comment and documentation.
-- :wrench: Tiny changes and improvements.
-- :bug: Fixing bugs.
-- :art: Add images and assets.
-- :sparkles: New feature and functionality.
-- :fire: Remove something.
+## Credit
+- [Telebot](https://github.com/tucnak/telebot/) `MIT License`. Telegram bot framework that I use in this project.
+- [Urban Dictionary](https://www.urbandictionary.com/). I use their API to get definition of sland word.
+- [(unofficial) Google Dictionary API](https://dictionaryapi.dev/). I use this for `/mean` and `/synonym` command.
+- [Type.fit](https://type.fit/). I ~~steal~~ use their API to get random quotes.
