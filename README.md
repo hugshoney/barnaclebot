@@ -2,11 +2,10 @@
 I always want to learn English but I'm so unmotivated, and I want to learn programming too, but I'm so lazy. Because of that, I'm trying to learn programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :sweat_smile:.
 
 ## Quick Start Setup
-1. Clone the repository. `git clone https://github.com/hugshoney/barnacle-bot.git`
-2. Open clone directory, and create Python environment. `python -m venv venv`
-3. Activate your environment, and install dependencies. `pip install -r requirements.txt`
-4. [Create bot](https://core.telegram.org/bots#6-botfather), and then add your Telegram bot token to `config.ini`.
-5. Start the bot with `python main.py`.
+1. Donwload latest program in here. *not ready right know*
+2. Open directory where you put `barnaclebot` using terminal.
+3. Create `TELEGRAM_TOKEN` variable in your shell, eg. `export TELEGRAM_TOKEN=1235335:BlahbLaHblAh`
+4. Run program `./barnaclebot`.
 
 ## List Bot Command
 - `/mean <word>`: Get definition of the word.
