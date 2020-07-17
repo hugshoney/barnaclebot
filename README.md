@@ -12,7 +12,6 @@ I always want to learn English but I'm so unmotivated, and I want to learn progr
 - `/slang <word>`: Get slang definition of the word.
 - `/synonym <word>`: Get synonyms of the word.
 - `/quote`: Get random quotes.
-- `/random`: Get random word.
 
 ## Credit
 - [Telebot](https://github.com/tucnak/telebot/) `MIT License`. Telegram bot framework that I use in this project.
