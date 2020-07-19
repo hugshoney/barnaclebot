@@ -1,5 +1,6 @@
+# Barnacle Bot
 ## Behind the Source Code
-I always want to learn English but I'm so unmotivated, and I want to learn programming too, but I'm so lazy. Because of that, I'm trying to learn programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :sweat_smile:.
+I always want to learn English but I'm so unmotivated, and I want to learn programming too, but I'm so lazy. Because of that, I'm trying to learn programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :joy_cat:.
 
 ## Quick Start Setup
 1. Donwload latest [Barnacle Bot](https://github.com/hugshoney/barnaclebot/releases/latest/download/barnaclebot).
@@ -15,7 +16,7 @@ I always want to learn English but I'm so unmotivated, and I want to learn progr
 - `/quote`: Get random quotes.
 
 ## Credit
-- [Telebot](https://github.com/tucnak/telebot/) `MIT License`. Telegram bot framework that I use in this project.
-- [Urban Dictionary](https://www.urbandictionary.com/). I use their API to get definition of slang word.
-- [(unofficial) Google Dictionary API](https://dictionaryapi.dev/). I use this for `/mean` and `/synonym` command.
-- [Type.fit](https://type.fit/). I ~~steal~~ use their API to get random quotes.
+- [Telebot](https://github.com/tucnak/telebot/) `MIT License`.  Telegram bot framework in Go. **"I never knew creating Telegram bots could be so sexy!"**, who said that :joy_cat:.
+- [Urban Dictionary](https://www.urbandictionary.com/).  "Crowdsourced online dictionary for slang words and phrases", according to [WikiPedia](https://en.wikipedia.org/wiki/Urban_Dictionary).
+- [(unofficial) Google Dictionary API](https://dictionaryapi.dev/).  Google does not provide API for google Dictionary so someone created one. 
+- [Type.fit](https://type.fit/).  It's web for keyboard typing practice, but I ~~steal~~ use their API to get random quotes.
