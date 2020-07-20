@@ -26,6 +26,7 @@ func Slang(word string) map[string]string {
 	var jsonResult SlangResponse
 	json.Unmarshal(data, &jsonResult)
 
+	// Make empty map for initial result.
 	var result = make(map[string]string)
 	// Add definition and example to map if there is result from API.
 	if len(jsonResult.List) != 0 {

@@ -31,9 +31,9 @@ func Dict(word string) []Mean {
 	var jsonResult []DictResponse
 	json.Unmarshal(data, &jsonResult)
 
+	// Initialize empty slice for result.
 	result := []Mean{}
-	// If definition found from result use Mean struct
-	// from JSON as result.
+	// If definition found from result use Mean struct from JSON as result.
 	if len(jsonResult) != 0 {
 		// Return only Mean as result.
 		result = jsonResult[0].Meaning
