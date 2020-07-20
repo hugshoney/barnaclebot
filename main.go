@@ -39,6 +39,12 @@ func main() {
 		b.Send(m.Sender, "Hi, buddy.")
 	})
 
+	// Send command help information when command /help is issued.
+	b.Handle("/help", func(m *tb.Message) {
+		helpText := "<b>List command:</b>\n<code>/mean &lt;word&gt;</code>: Get definition of the word.\n<code>/slang &lt;word&gt;</code>: Get slang definition of the word.\n<code>/synonym &lt;word&gt;</code>: Get synonyms of the word.\n<code>/quote</code>: Get random quotes."
+		b.Send(m.Sender, helpText, tb.ModeHTML)
+	})
+
 	// Send definition and example use of slang word,
 	// when command /slang is issued.
 	b.Handle("/slang", func(m *tb.Message) {
