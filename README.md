@@ -1,8 +1,7 @@
 # Barnacle Bot
 [![GitHub license](https://img.shields.io/github/license/hugshoney/barnaclebot?style=for-the-badge)](https://github.com/hugshoney/barnaclebot/blob/master/LICENSE)
 
-## Behind the Source Code
-I always want to learn English but I'm so unmotivated, and I want to learn programming too, but I'm so lazy. Because of that, I'm trying to learn programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :joy_cat:.
+I always want to learn English but I'm so unmotivated, and I want to learn programming too, but I'm so lazy. Because of that, I'm trying to learn programming while making a Telegram bot to help myself learn English. Now, my English and programming skill that I have still sucks :sweat_smile:.
 
 ## Quick Start Setup
 1. Donwload latest [Barnacle Bot](https://github.com/hugshoney/barnaclebot/releases/latest/download/barnaclebot).
