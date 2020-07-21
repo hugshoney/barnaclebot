@@ -13,7 +13,7 @@ import (
 func GetData(url, word string) []byte {
 	// If API need input word as argument.
 	if word != "" {
-		// Concatination word with url as full url adress.
+		// Concatenation word with url as full url address.
 		url += word
 	}
 	// Take response from API url.

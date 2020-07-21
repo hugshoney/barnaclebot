@@ -53,8 +53,7 @@ func main() {
 		result := en.Slang(m.Payload)
 		// Create full message variable.
 		var fullText string
-		// If result defintion of slang word exist, process
-		// text of message.
+		// If definition result of slang word exist, process text of message.
 		if len(result) != 0 {
 			def := result["definition"]
 			// If example exists, also include example text.
