@@ -8,18 +8,18 @@ import (
 	"encoding/json"
 )
 
-// Structuring JSON for definition and example of slang word.
+// SlangWord struct for definition and example of slang word.
 type SlangWord struct {
 	Define  string `json:"definition"`
 	Example string `json:"example"`
 }
 
-// Structuring JSON for list of definition and example result.
+// SlangResponse struct for list of definition and example result.
 type SlangResponse struct {
 	List []SlangWord `json:"list"`
 }
 
-// Get definition and example of slang word from UrbanDictionary API.
+// Slang get definition and example of slang word from UrbanDictionary.
 func Slang(word string) map[string]string {
 	data := GetData("http://api.urbandictionary.com/v0/define?term=", word)
 

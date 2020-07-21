@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-// Call API and take response as data.
+// GetData take response from given url as data byte.
 func GetData(url, word string) []byte {
 	// If API need input word as argument.
 	if word != "" {

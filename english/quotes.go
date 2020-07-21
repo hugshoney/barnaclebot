@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// Get random quotes.
+// Quotes return random quotes from type.fit.
 func Quotes() map[string]string {
 	data := GetData("https://type.fit/api/quotes", "")
 

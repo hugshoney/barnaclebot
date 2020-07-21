@@ -6,25 +6,25 @@ package english
 
 import "encoding/json"
 
-// Struct for word meaning, example, and synonyms.
+// Word struct for word meaning, example, and synonyms.
 type Word struct {
 	Mean    string   `json:"definition"`
 	Example string   `json:"Example"`
 	Synonym []string `json:"Synonyms"`
 }
 
-// Struct for list of Definitions in result.
+// Mean struct for list of Definitions in result.
 type Mean struct {
 	Speech      string `json:"partOfSpeech"`
 	Definitions []Word `json:"definitions"`
 }
 
-// Struct to hold response when calling API.
+// DictResponse struct to hold response when calling API.
 type DictResponse struct {
 	Meaning []Mean `json:"meanings"`
 }
 
-// Get word meaning, example, and part of speech from word.
+// Dict return word definition, example, and part of speech from given word.
 func Dict(word string) []Mean {
 	data := GetData("https://api.dictionaryapi.dev/api/v2/entries/en/", word)
 
