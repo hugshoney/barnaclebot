@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	en "github.com/hugshoney/barnaclebot/english"
 	tb "gopkg.in/tucnak/telebot.v2"
@@ -20,19 +21,26 @@ import (
 // Just general main function to start Telegram Bot.
 // Copied from telebot README with some modification.
 func main() {
-	// Heroku public URL.
+	// Initialize settings
+	var botSettings tb.Settings
+	// Add telegram token to settings.
+	botSettings.Token = os.Getenv("TELEGRAM_TOKEN")
+	// Check if Public URL exist in envrionment variable.
 	publicURL := os.Getenv("PUBLIC_URL")
-	port := os.Getenv("PORT")
-
-	webhook := &tb.Webhook{
-		Listen:   ":" + port,
-		Endpoint: &tb.WebhookEndpoint{PublicURL: publicURL},
+	// If public url exist, use webhook, else use longpoller.
+	if publicURL != "" {
+		port := os.Getenv("PORT")
+		webhook := &tb.Webhook{
+			Listen:   ":" + port,
+			Endpoint: &tb.WebhookEndpoint{PublicURL: publicURL},
+		}
+		botSettings.Poller = webhook
+	} else {
+		botSettings.Poller = &tb.LongPoller{Timeout: 10 * time.Second}
 	}
 
-	b, err := tb.NewBot(tb.Settings{
-		Token:  os.Getenv("TELEGRAM_TOKEN"),
-		Poller: webhook,
-	})
+	// Create bot.
+	b, err := tb.NewBot(botSettings)
 	if err != nil {
 		panic(err)
 	}
