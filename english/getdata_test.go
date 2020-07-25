@@ -10,18 +10,24 @@ import (
 	"testing"
 )
 
+// Test for GetData
 func TestGetData(t *testing.T) {
-	jsonData := []byte(`{"It's just a test"}`)
+	// Create data for body.
+	data := []byte(`{"It's just a test"}`)
 
-	serverAPI := httptest.NewServer(http.HandlerFunc(
+	// Create server for testing.
+	serverTest := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			w.Write(jsonData)
+			w.Write(data)
 			w.WriteHeader(http.StatusOK)
 		}))
-	defer serverAPI.Close()
-	got := GetData(serverAPI.URL, "")
+	// Close server in the end of function.
+	defer serverTest.Close()
+	// Use testing server url as paramater for GetData.
+	got := GetData(serverTest.URL, "")
 
-	if !reflect.DeepEqual(got, jsonData) {
-		t.Errorf("got %v want %v", got, jsonData)
+	// Check if is equal or not with data.
+	if !reflect.DeepEqual(got, data) {
+		t.Errorf("got %v want %v", got, data)
 	}
 }
