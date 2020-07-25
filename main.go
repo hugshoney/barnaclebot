@@ -27,15 +27,20 @@ func main() {
 	botSettings.Token = os.Getenv("TELEGRAM_TOKEN")
 	// Check if Public URL exist in envrionment variable.
 	publicURL := os.Getenv("PUBLIC_URL")
-	// If public url exist, use webhook, else use longpoller.
+	// If public url provided in user environment, use webhook
+	// instead long poller.
 	if publicURL != "" {
+		// set port automatically from Heroku.
 		port := os.Getenv("PORT")
+		// Setup webook.
 		webhook := &tb.Webhook{
 			Listen:   ":" + port,
 			Endpoint: &tb.WebhookEndpoint{PublicURL: publicURL},
 		}
+		// Use webhook for poller.
 		botSettings.Poller = webhook
 	} else {
+		// Use long poller for poller.
 		botSettings.Poller = &tb.LongPoller{Timeout: 10 * time.Second}
 	}
 
