@@ -21,6 +21,8 @@ func GetData(url, word string) []byte {
 	if err != nil {
 		panic(err.Error())
 	}
+	// Close response body before return.
+	defer response.Body.Close()
 	// Get body of data from API response.
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
